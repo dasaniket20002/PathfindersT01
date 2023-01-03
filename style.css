@@ -1,0 +1,21 @@
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+
+canvas {
+	display: block;
+}
+
+.header {
+	height: 10vh;
+	width: 100%;
+
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+.header select {
+	width: max(10rem, 1vw);
+}
