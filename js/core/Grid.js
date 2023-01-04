@@ -4,7 +4,20 @@ class Grid {
 		this.gridSizeY = Math.floor(windowH / Tile.TILE_SIZE);
 
 		this.constructTiles();
+		this.seeker = new Seeker(0, 0);
+		this.target = new Target(0, 0);
+		this.regenerateAgents();
+	}
+	constructTiles() {
+		this.tiles = [];
+		for (let i = 0; i < this.gridSizeX; i++) {
+			for (let j = 0; j < this.gridSizeY; j++) {
+				this.tiles.push(new Tile(i, j));
+			}
+		}
+	}
 
+	regenerateAgents() {
 		let randomTile1 = random(this.tiles);
 		while (randomTile1.is_wall || randomTile1.is_occupied)
 			randomTile1 = random(this.tiles);
@@ -15,16 +28,8 @@ class Grid {
 			randomTile2 = random(this.tiles);
 		randomTile2.is_occupied = true;
 
-		this.seeker = new Seeker(randomTile1.x, randomTile1.y);
-		this.target = new Target(randomTile2.x, randomTile2.y);
-	}
-	constructTiles() {
-		this.tiles = [];
-		for (let i = 0; i < this.gridSizeX; i++) {
-			for (let j = 0; j < this.gridSizeY; j++) {
-				this.tiles.push(new Tile(i, j));
-			}
-		}
+		this.seeker.updateLoc(randomTile1.x, randomTile1.y);
+		this.target.updateLoc(randomTile2.x, randomTile2.y);
 	}
 
 	draw() {

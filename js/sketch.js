@@ -6,6 +6,10 @@ var isSeekerHeld;
 var isTargetHeld;
 var previousHeldTile;
 
+var algorithm;
+var visited_nodes;
+var path_nodes;
+
 function setup() {
 	createCanvas(windowWidth, windowHeight - 0.1 * windowHeight);
 	grid = new Grid(width, height);
@@ -13,6 +17,10 @@ function setup() {
 
 	isSeekerHeld = false;
 	isTargetHeld = false;
+
+	algorithm = new DijkstraAlgorithm();
+	visited_nodes = [];
+	path_nodes = [];
 }
 
 function windowResized() {
@@ -30,9 +38,28 @@ function update() {
 
 function draw() {
 	update();
-
 	background(220);
+
+	if (visited_nodes.length > 0) {
+		visited_nodes.forEach((element) => {
+			element.drawVisitedNodes();
+		});
+	}
+	if (path_nodes.length > 1) {
+		path_nodes.forEach((element) => {
+			element.drawPathNodes();
+		});
+	}
 	grid.draw();
+}
+
+function setAlgorithm() {
+	//TODO
+}
+function evaluateAlgorithm() {
+	algorithm.initialize(grid);
+	visited_nodes = algorithm.evaluate();
+	path_nodes = algorithm.getShortestPath();
 }
 
 function mousePressed() {
@@ -67,7 +94,6 @@ function mouseDragged() {
 function mouseReleased() {
 	if (!drawWallMode) {
 		let t = getClickedTile();
-		console.log(t);
 		if (t == undefined || t.is_wall || t.is_occupied) {
 			revertPositions();
 		} else {

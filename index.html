@@ -8,22 +8,35 @@
 
 		<link rel="stylesheet" type="text/css" href="style.css" />
 
-		<script src="libraries/p5.min.js"></script>
-		<script src="libraries/p5.sound.min.js"></script>
+		<!-- <script src="libraries/p5.min.js"></script>
+		<script src="libraries/p5.sound.min.js"></script> -->
+
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.5.0/p5.min.js"
+			integrity="sha512-WJXVjqeINVpi5XXJ2jn0BSCfp0y80IKrYh731gLRnkAS9TKc5KNt/OfLtu+fCueqdWniouJ1ubM+VI/hbo7POQ=="
+			crossorigin="anonymous"
+			referrerpolicy="no-referrer"
+		></script>
 
 		<script src="js/core/Tile.js"></script>
 		<script src="js/core/Grid.js"></script>
 		<script src="js/core/Seeker.js"></script>
 		<script src="js/core/Target.js"></script>
+
+		<script src="js/algorithms/a-star/AStarNode.js"></script>
+		<script src="js/algorithms/a-star/AStarAlgorithm.js"></script>
+		<script src="js/algorithms/dijkstra/DijkstraNode.js"></script>
+		<script src="js/algorithms/dijkstra/DijkstraAlgorithm.js"></script>
 	</head>
 
 	<body>
 		<div class="header">
 			<select name="algo-select" id="algo-select">
-				<option value="a-star">A*</option>
+				<option value="a-star">Dijkstra's Algorithm</option>
 			</select>
 			<button onclick="drawWallMode=!drawWallMode">draw wall</button>
-			<button>find path</button>
+			<button onclick="grid.regenerateAgents()">regenerate agents</button>
+			<button onclick="evaluateAlgorithm()">find path</button>
 		</div>
 		<script src="js/sketch.js"></script>
 	</body>
