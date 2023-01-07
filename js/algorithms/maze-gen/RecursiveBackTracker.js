@@ -65,14 +65,10 @@ class RecursiveBackTracker {
 		startTile.is_wall = false;
 		visitedStack.push(startTile);
 
-		console.log(startTile);
-
 		let currentTile = random(startTile.getUnvisitedNeighbours());
 		currentTile.is_visited = true;
 		currentTile.is_wall = false;
-		visitedStack.push(currentTile);
-
-		console.log(currentTile);
+		visitedStack.push(currentTile)
 
 		let middleIndex = startTile.getMiddleTileIndex(currentTile);
 		mazeTiles[
