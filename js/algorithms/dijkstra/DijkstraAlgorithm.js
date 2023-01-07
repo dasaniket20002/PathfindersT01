@@ -5,10 +5,6 @@ class DijkstraAlgorithm {
 			return 1; // cost for up, down, left, right
 		else return 1.414; // cost for diagonal tiles
 	}
-	//distance between 2 points
-	static distance_function(u, v) {
-		return Math.sqrt((u.x - v.x) * (u.x - v.x) + (u.y - v.y) * (u.y - v.y));
-	}
 
 	initialize(grid) {
 		this.nodes = [];
