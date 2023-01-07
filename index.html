@@ -27,6 +27,8 @@
 		<script src="js/algorithms/a-star/AStarAlgorithm.js"></script>
 		<script src="js/algorithms/dijkstra/DijkstraNode.js"></script>
 		<script src="js/algorithms/dijkstra/DijkstraAlgorithm.js"></script>
+
+		<script src="js/algorithms/maze-gen/RecursiveBackTracker.js"></script>
 	</head>
 
 	<body>
@@ -37,6 +39,7 @@
 			<button onclick="drawWallMode=!drawWallMode">draw wall</button>
 			<button onclick="grid.regenerateAgents()">regenerate agents</button>
 			<button onclick="evaluateAlgorithm()">find path</button>
+			<button onclick="generateMaze()">generate maze</button>
 		</div>
 		<script src="js/sketch.js"></script>
 	</body>

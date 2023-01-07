@@ -10,6 +10,8 @@ var algorithm;
 var visited_nodes;
 var path_nodes;
 
+var maze;
+
 function setup() {
 	createCanvas(windowWidth, windowHeight - 0.1 * windowHeight);
 	grid = new Grid(width, height);
@@ -62,6 +64,15 @@ function evaluateAlgorithm() {
 	path_nodes = algorithm.getShortestPath();
 }
 
+function generateMaze() {
+	let maze = RecursiveBackTracker.generate(grid);
+	if (maze.length != grid.tiles.length) return;
+	for (let i = 0; i < grid.tiles.length; i++) {
+		grid.tiles[i].is_wall = maze[i].is_wall;
+	}
+	grid.regenerateAgents();
+}
+
 function mousePressed() {
 	if (drawWallMode) {
 		let t = getClickedTile();
@@ -99,6 +110,9 @@ function mouseReleased() {
 		} else {
 			updatePositions(t);
 		}
+
+		visited_nodes = [];
+		path_nodes = [];
 	}
 }
 

@@ -28,26 +28,32 @@ class DijkstraAlgorithm {
 
 		for (let e = 0; e < this.nodes.length; e++) {
 			let node = this.nodes[e];
-			for (let i = -1; i <= 1; i++) {
-				for (let j = -1; j <= 1; j++) {
-					if (i == 0 && j == 0) continue;
-					if (
-						node.x + i >= 0 &&
-						node.x + i < grid.gridSizeX &&
-						node.y + j >= 0 &&
-						node.y + j < grid.gridSizeY
-					) {
-						let index =
-							(node.x + i) * grid.gridSizeY + (node.y + j);
-						let neighbour = this.getNode(
-							grid.tiles[index].x,
-							grid.tiles[index].y
-						);
 
-						if (neighbour == undefined) continue;
+			let indices = [
+				[1, 0],
+				[0, 1],
+				[-1, 0],
+				[0, -1],
+			];
 
-						node.adjacent_nodes.push(neighbour);
-					}
+			for (let ind = 0; ind < indices.length; ind++) {
+				if (
+					node.x + indices[ind][0] >= 0 &&
+					node.x + indices[ind][0] < grid.gridSizeX &&
+					node.y + indices[ind][1] >= 0 &&
+					node.y + indices[ind][1] < grid.gridSizeY
+				) {
+					let index =
+						(node.x + indices[ind][0]) * grid.gridSizeY +
+						(node.y + indices[ind][1]);
+					let neighbour = this.getNode(
+						grid.tiles[index].x,
+						grid.tiles[index].y
+					);
+
+					if (neighbour == undefined) continue;
+
+					node.adjacent_nodes.push(neighbour);
 				}
 			}
 		}
