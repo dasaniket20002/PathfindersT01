@@ -9,6 +9,7 @@ class Target {
 	}
 
 	draw() {
+		push();
 		fill(0);
 		textSize(Tile.TILE_SIZE - 5);
 		textAlign(CENTER, CENTER);
@@ -29,5 +30,6 @@ class Target {
 			Tile.TILE_SIZE
 		);
 		noStroke();
+		pop();
 	}
 }

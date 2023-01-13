@@ -25,23 +25,23 @@ class DijkstraAlgorithm {
 		for (let e = 0; e < this.nodes.length; e++) {
 			let node = this.nodes[e];
 
-			let indices = [
+			let neighbourIndices = [
 				[1, 0],
 				[0, 1],
 				[-1, 0],
 				[0, -1],
 			];
 
-			for (let ind = 0; ind < indices.length; ind++) {
+			for (let ind = 0; ind < neighbourIndices.length; ind++) {
 				if (
-					node.x + indices[ind][0] >= 0 &&
-					node.x + indices[ind][0] < grid.gridSizeX &&
-					node.y + indices[ind][1] >= 0 &&
-					node.y + indices[ind][1] < grid.gridSizeY
+					node.x + neighbourIndices[ind][0] >= 0 &&
+					node.x + neighbourIndices[ind][0] < grid.gridSizeX &&
+					node.y + neighbourIndices[ind][1] >= 0 &&
+					node.y + neighbourIndices[ind][1] < grid.gridSizeY
 				) {
 					let index =
-						(node.x + indices[ind][0]) * grid.gridSizeY +
-						(node.y + indices[ind][1]);
+						(node.x + neighbourIndices[ind][0]) * grid.gridSizeY +
+						(node.y + neighbourIndices[ind][1]);
 					let neighbour = this.getNode(
 						grid.tiles[index].x,
 						grid.tiles[index].y

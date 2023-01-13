@@ -33,7 +33,7 @@ class Grid {
 	}
 
 	draw() {
-		strokeWeight(2);
+		strokeWeight(0.2);
 		this.tiles.forEach(function (tile) {
 			tile.draw();
 		});

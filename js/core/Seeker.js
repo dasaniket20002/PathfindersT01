@@ -9,6 +9,7 @@ class Seeker {
 	}
 
 	draw() {
+		push();
 		fill(0);
 		textSize(Tile.TILE_SIZE - 5);
 		textAlign(CENTER, CENTER);
@@ -29,5 +30,6 @@ class Seeker {
 			Tile.TILE_SIZE
 		);
 		noStroke();
+		pop();
 	}
 }

@@ -31,6 +31,9 @@ class RecursiveBackTracker {
 	static generate(grid) {
 		let mazeTiles = [];
 		let visitedStack = [];
+
+		let visitOrder = [];
+
 		for (let i = 0; i < grid.tiles.length; i++) {
 			let mazeTile = new MazeTile(grid.tiles[i]);
 			mazeTiles.push(mazeTile);
@@ -68,15 +71,17 @@ class RecursiveBackTracker {
 		let currentTile = random(startTile.getUnvisitedNeighbours());
 		currentTile.is_visited = true;
 		currentTile.is_wall = false;
-		visitedStack.push(currentTile)
+		visitedStack.push(currentTile);
 
 		let middleIndex = startTile.getMiddleTileIndex(currentTile);
-		mazeTiles[
-			middleIndex[0] * grid.gridSizeY + middleIndex[1]
-		].is_wall = false;
-		mazeTiles[
-			middleIndex[0] * grid.gridSizeY + middleIndex[1]
-		].is_visited = true;
+		let middleTile =
+			mazeTiles[middleIndex[0] * grid.gridSizeY + middleIndex[1]];
+		middleTile.is_wall = false;
+		middleTile.is_visited = true;
+
+		visitOrder.push(startTile);
+		visitOrder.push(middleTile);
+		visitOrder.push(currentTile);
 
 		while (true) {
 			if (currentTile.x == startTile.x && currentTile.y == startTile.y)
@@ -85,6 +90,7 @@ class RecursiveBackTracker {
 			let unvisitedNeighbours = currentTile.getUnvisitedNeighbours();
 			if (unvisitedNeighbours.length == 0) {
 				currentTile = visitedStack.pop();
+				visitOrder.push(currentTile);
 				continue;
 			}
 			let prevTile = currentTile;
@@ -95,14 +101,15 @@ class RecursiveBackTracker {
 			visitedStack.push(currentTile);
 
 			middleIndex = prevTile.getMiddleTileIndex(currentTile);
-			mazeTiles[
-				middleIndex[0] * grid.gridSizeY + middleIndex[1]
-			].is_wall = false;
-			mazeTiles[
-				middleIndex[0] * grid.gridSizeY + middleIndex[1]
-			].is_visited = true;
+			middleTile =
+				mazeTiles[middleIndex[0] * grid.gridSizeY + middleIndex[1]];
+			middleTile.is_wall = false;
+			middleTile.is_visited = true;
+
+			visitOrder.push(middleTile);
+			visitOrder.push(currentTile);
 		}
 
-		return mazeTiles;
+		return visitOrder;
 	}
 }
